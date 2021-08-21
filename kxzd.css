@@ -1,0 +1,46 @@
+body {margin-top:0px;margin-left:5px;margin-right:0;}
+/* 保留原來的Enter換行，並自動折行*/
+xml {white-space:pre-wrap}
+
+/*，指定標記樣式*/
+wh {font-size:2em;border:1px gray solid ; border-radius: 0.2em;}
+note{color:brown;font-size:85%;font-weight: bold;}
+note::after {content: attr(n) }
+
+/*原書超連結*/
+k {color:blue;cursor:pointer}
+
+/*注音*/
+zy {color:blueviolet;font-weight: bold;}
+/* 音*/
+ph {color:rgb(3, 81, 126)}
+/*頁碼*/
+pb {color:green}
+/* 書局名 */
+pb::after { content: attr(ed)":"attr(id)}
+/* 釋義*/
+d::before {color:brown;content:"●"}
+an{color:navy;font-size:150%}
+an::before {content:"古文:"}
+/*嵌入框樣式*/
+iframe {border:dotted 1px silver}
+
+/*嵌入框的背景色*/
+.nested {background-color:rgb(253, 237, 218)}
+
+/*嵌入框的大小*/
+.card {height: 8em;width:100%}
+
+
+/*關閉按鈕*/
+.btnclose {float:left;cursor:pointer;background-color: rgb(104, 104, 104);color:white
+;border-radius: 50%;padding:0.3em}
+.btnclose:hover{background-color:red}
+.btnclose::after {content:"x" }
+
+/*開新分頁按鈕*/
+.btnnewtab{cursor:pointer;float:left;cursor:pointer;background-color: rgb(104, 104, 104);color:white
+    ;border-radius: 50%;padding:0.3em}
+.btnnewtab:hover{background-color:limegreen;}
+.btnnewtab::after{content:'+'}
+

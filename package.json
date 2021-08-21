@@ -1,0 +1,23 @@
+{
+  "name": "kxzd",
+  "version": "0.0.1",
+  "description": "Kangxizidian in HTML",
+  "type":"module",
+  "main": "kxzd.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build":"rollup -c",
+    "dev":"rollup -c -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://yapcheahshen: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@github.com/kangxizidian/kxzd"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kangxizidian/kxzd/issues"
+  },
+  "homepage": "https://github.com/kangxizidian/kxzd#readme"
+}
