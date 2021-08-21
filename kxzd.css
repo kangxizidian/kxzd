@@ -43,4 +43,7 @@ iframe {border:dotted 1px silver}
     ;border-radius: 50%;padding:0.3em}
 .btnnewtab:hover{background-color:limegreen;}
 .btnnewtab::after{content:'+'}
-
+/* 原書到康熙的連結 */
+.backlink{cursor:pointer;background:lightblue;margin-left:0.5em}
+.backlink:hover{border-bottom:1px solid blue}
+.backlinkgroup::after {color:brown; content:'康熙§'}

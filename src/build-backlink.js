@@ -5,37 +5,52 @@ import {pack_delta,escapePackedStr} from './packintarray.js'
 const folder="../";
 const files=readdirSync("..");
 
-const fileWordheads={};
+const ForwardLinks={};
 
 files.forEach(file=>{
     if (!file.endsWith(".htm"))return;
-    fileWordheads[file]=[];
     const content=readFileSync(folder+file,'utf8');
-    content.replace(/<a name="(.+?)">/g,(m,m1)=>{
-        fileWordheads[file].push(m1);
+    const lines=content.split(/\r?\n/);
+
+    ForwardLinks[file]={};
+    let wh='';
+    lines.forEach(line=>{
+        const m=line.match(/a name="u(.+?)">/);
+        if (m) wh=m[1];
+        line.replace(/<k n="(.+?)">/g,(m,m1)=>{
+            const lnk=m1.match(/(.+?):(.+)/);
+            if (lnk) {
+                const [m0,fn,addr]=lnk;
+                const htmlfn=fn+'.htm';
+                if (!ForwardLinks[file][htmlfn]) ForwardLinks[file][htmlfn]=[];
+                ForwardLinks[file][htmlfn].push([addr,wh]);
+            } else {
+                console.log('wrong link target',m1,'file',file);
+            }
+        })
     })
+
 })
 
-for (let fn in fileWordheads) {
-    fileWordheads[fn]=fileWordheads[fn].join('');
-}
-//from 250KB to 48KB
+const Backlinks={};//  htm: array of wh
+for (let i in ForwardLinks) { //remove file without any links.
+    if (!Object.keys(ForwardLinks[i]).length) delete ForwardLinks[i];
+    else {
+        for (let srcbk in ForwardLinks[i]) {
+            const rawlinkarray=ForwardLinks[i][srcbk];
+            //sort by unicode value of kangxi wh
 
-const out=[];
-for (let fn in fileWordheads) {
-    const codes=[];
-    fileWordheads[fn].replace(/u([^u]+)/g,(m,uni)=>{
-        const unicode=parseInt(uni,16);
-        if (unicode) {
-            codes.push(unicode);
+            if (!Backlinks[srcbk]) Backlinks[srcbk]={};
+            
+            for (let j=0;j<rawlinkarray.length;j++) {
+                const [addr,wh]=rawlinkarray[j];
+                if (!Backlinks[srcbk][addr]) Backlinks[srcbk][addr]='';
+                Backlinks[srcbk][addr]+='u'+wh;
+            }
         }
-    });
-    codes.sort((a,b)=>a-b);
-
-    out.push(escapePackedStr(pack_delta(codes)));
+    }
 }
 
-const keys=JSON.stringify(Object.keys(fileWordheads));
+const out=JSON.stringify(Backlinks,'',' ');
 
-writeFileSync('../filewordhead.js','window.kxzd_htmlFileNames='+keys+
-';\nwindow.kxzd_headwords=`'+out.join('\n') +'`','utf8');
+writeFileSync('../backlinks.js','window.kxzd_backlinks='+out,'utf8');

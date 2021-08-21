@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html><html><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<body>
+<a href="kxzd/ziyin/index.html">康熙字引</a>
+<a href="kxzd/kx01-01-01.htm#u4E00">康熙「一」</a>
+<!-- this file should be placed in upper folder//-->
+<h2>康熙字典 與 古籍互連 測試版</h2>
+<p style="white-space:pre-wrap">
+進入康熙字引，有操作說明。
+如果康熙有該字，會出現「康熙字典」的棕色連結。
+輸入「一」，連到康熙字典，任何字都可以點，會載入該字頭所在的htm（htm越大，載入越慢），
+並裁去其他內容。
+
+嵌入窗點 x 關閉，點 + 以新的瀏覽器頁籤打開並顯示整個htm內容。
+
+看到四個藍色書名超連結，
+標記語法是 &lt;k n="yi:65.9"&gt;易．繫辭&lt;/k&gt;
+其中 yi 會連到 cct/yi.htm 的 &lt;a name="65.9"&gt;
+
+點一下藍色書名，會嵌入顯示原文段落（淺橙色），
+點 + 打開 道德經，會捲到康熙引用的段落。
+棕色「康熙§」是「反連結」，表示這些康熙字頭引用了這個段落。
+逆連結是系統自動加上的，不必人工維護，
+但每次修改康熙的k 標記後，要在kxzd/src目錄執行 node build-backlink.js
+才會更新逆連結資料庫 (kxzd/backlinks.js) ，這個檔不要手動修改，應自動產生。
+
+程式的外觀和按鈕都可以在 kxzd.css 修改。
+
+這個系統不依賴任何服務器端的程序，所以直接上傳到網頁主機即可運行。
+
+相關的repo，詳細的說明在各自的 README.md，你都可以改。
+漢字引    <a href="https://github.com/hanziku/hanziyin-app">hanziku/hanziyin-app</a>
+康熙字典  <a href="https://github.com/kangxizidian/kxzd">kangxizidian/kxzd</a>
+核心古籍  <a href="https://github.com/kangxizidian/cct">kangxizidian/cct</a>
+
+2021.8.21
+
+</p>
+</body>
+</html>
