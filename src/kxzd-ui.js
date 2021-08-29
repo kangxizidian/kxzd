@@ -85,7 +85,7 @@ const card_kxzd=evt=>{
     const ele=document.createElement("iframe");
     ele.className="card";
     ele.name='card_'+aname;
-
+    ele.sandbox="allow-same-origin allow-scripts"
     if (!window.kxzd_headwords)return;//not ready yet
     ele.src=fileByUnicode(t.tofind.codePointAt(0))+"?embed#"+aname;
     // ele.innerHTML='explaining '+t.tofind;
@@ -162,7 +162,7 @@ const loadScript=src=>{
     } else { //
         script.src='../kxzd/'+src;
     }
-    document.getElementsByTagName('head')[0].appendChild(script); 
+    document.head.appendChild(script); 
 }
 const addWordheadLink=(domnode,wh)=>{
     const lnk=document.createElement('span');

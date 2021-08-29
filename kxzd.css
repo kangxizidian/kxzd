@@ -1,6 +1,7 @@
 body {margin-top:0px;margin-left:5px;margin-right:0;}
 /* 保留原來的Enter換行，並自動折行*/
 xml {white-space:pre-wrap}
+ph {font-family: 微軟正黑體}
 
 /*，指定標記樣式*/
 wh {font-size:2em;border:1px gray solid ; border-radius: 0.2em;}
